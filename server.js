@@ -11,6 +11,10 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.get("/healtz", (req, res) => {
+  res.status(200);
+});
+
 app.post("/match/:id", async (req, res) => {
   const GRAPHQL_API_URL = "https://api.stratz.com/graphql";
 
