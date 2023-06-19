@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get("/healtz", (req, res) => {
-  res.status(200);
+  res.status(200).json({ message: "all good!" });
 });
 
 app.post("/match/:id", async (req, res) => {
