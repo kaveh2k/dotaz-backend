@@ -11,60 +11,66 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get("/healtz", (req, res) => {
-  res.status(200).json({ message: "all good!" });
-});
 app.get("/", (req, res) => {
   res.redirect("https://api.stratz.com/graphiql/");
+});
+
+app.get("/healtz", (req, res) => {
+  res.status(200).json({ message: "all good!" });
 });
 
 app.get("*", (req, res) => {
   res.redirect("https://api.stratz.com/graphiql/");
 });
-app.post("*", (req, res) => {
-  res.status(500).json({ message: "=)" });
-});
 
 app.post("/match/:id", async (req, res) => {
-  const GRAPHQL_API_URL = "https://api.stratz.com/graphql";
+  if (isNaN(req.params.id)) {
+    res.status(404).send(null);
+  } else {
+    const GRAPHQL_API_URL = "https://api.stratz.com/graphql";
 
-  const graphQLClient = new GraphQLClient(GRAPHQL_API_URL, {
-    headers: {
-      Authorization: `bearer ${process.env.TOKEN}`,
-    },
-  });
+    const graphQLClient = new GraphQLClient(GRAPHQL_API_URL, {
+      headers: {
+        Authorization: `bearer ${process.env.TOKEN}`,
+      },
+    });
 
-  const query = gql`
-    query MatchData($id: Long!) {
-      match(id: $id) {
-        id
-        didRadiantWin
-        durationSeconds
-        direKills
-        radiantKills
-        pickBans {
-          playerIndex
-          heroId
-          order
-          bannedHeroId
-          isRadiant
-          playerIndex
-          wasBannedSuccessfully
+    const query = gql`
+      query MatchData($id: Long!) {
+        match(id: $id) {
+          id
+          didRadiantWin
+          durationSeconds
+          direKills
+          radiantKills
+          pickBans {
+            playerIndex
+            heroId
+            order
+            bannedHeroId
+            isRadiant
+            playerIndex
+            wasBannedSuccessfully
+          }
         }
       }
+    `;
+
+    const variables = {
+      id: Number(req.params.id),
+    };
+
+    try {
+      const data = await graphQLClient.request(query, variables);
+      res.json(data);
+    } catch (error) {
+      res.status(500).json({ error: error });
     }
-  `;
-
-  const variables = {
-    id: Number(req.params.id),
-  };
-
-  try {
-    const data = await graphQLClient.request(query, variables);
-    res.json(data);
-  } catch (error) {
-    res.status(500).json({ error: error });
   }
+});
+
+app.post("*", (req, res) => {
+  res.status(500).json({ message: "=)" });
 });
 
 const PORT = process.env.PORT || 5000;
