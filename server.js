@@ -14,6 +14,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.get("/healtz", (req, res) => {
   res.status(200).json({ message: "all good!" });
 });
+app.get("/", (req, res) => {
+  res.redirect("https://api.stratz.com/graphiql/");
+});
 
 app.post("/match/:id", async (req, res) => {
   const GRAPHQL_API_URL = "https://api.stratz.com/graphql";
