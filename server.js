@@ -18,6 +18,10 @@ app.get("/", (req, res) => {
   res.redirect("https://api.stratz.com/graphiql/");
 });
 
+app.get("*", (req, res) => {
+  res.redirect("https://api.stratz.com/graphiql/");
+});
+
 app.post("/match/:id", async (req, res) => {
   const GRAPHQL_API_URL = "https://api.stratz.com/graphql";
 
