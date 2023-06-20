@@ -24,6 +24,7 @@ app.get("*", (req, res) => {
 });
 
 app.post("/match/:id", async (req, res) => {
+  console.log("Received request with ID:", req.params.id);
   if (isNaN(req.params.id)) {
     res.status(404).send(null);
   } else {
