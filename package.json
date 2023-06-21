@@ -2,7 +2,7 @@
   "name": "dotaz-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "./src/config/server.js",
   "scripts": {
     "dev": "nodemon ./src/config/server.js",
     "start": "node ./src/config/server.js"
