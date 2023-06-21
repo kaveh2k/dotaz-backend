@@ -1,7 +1,10 @@
 const { getMatchData } = require("../../services/match.service");
 
 const getMatchInfo = async (req, res, next) => {
-  console.log("Received request with ID:", req.params.id);
+  console.log(`someone on ${req.url} page 
+  ip : ${req.clientIp}
+  host : ${req.headers.host}
+  pageparames: ${req.params.id}`);
   if (isNaN(req.params.id)) {
     res.status(404).send(null);
   } else {
