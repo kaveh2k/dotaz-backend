@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 require("dotenv").config();
 const express = require("express");
 const helmet = require("helmet");
-const router = require("../routers/index.router");
+const router = require("./routers/index.router");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
