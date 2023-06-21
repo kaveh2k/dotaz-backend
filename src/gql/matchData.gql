@@ -1,0 +1,19 @@
+query MatchData($id: Long!) {
+  match(id: $id) {
+    id
+    didRadiantWin
+    durationSeconds
+    direKills
+    radiantKills
+    pickBans {
+      playerIndex
+      heroId
+      order
+      bannedHeroId
+      isRadiant
+      playerIndex
+      wasBannedSuccessfully
+    }
+  }
+}
+// TODO: add this to match.service.js
