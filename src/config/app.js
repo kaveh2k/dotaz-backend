@@ -7,13 +7,7 @@ const router = require("../routers/index.router");
 const clientIp = require("../middlewares/clientIp.middleware");
 const session = require("express-session");
 const generateRandomSecret = require("../services/RandomSecret.service");
-
-const jwt = require("jsonwebtoken");
-
-const { db } = require("./database");
-
 const sessionSecret = generateRandomSecret();
-const jwtSecret = process.env.JWT_SECRET;
 
 // Set up Express app
 const app = express();

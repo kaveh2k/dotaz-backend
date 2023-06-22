@@ -7,6 +7,7 @@ const { healtzRouter } = require("./healtz/healtz.router.js");
 
 router.use("/match", matchRouter);
 router.use("/healtz", healtzRouter);
+router.use("/auth", mainRouter);
 router.use("/*", mainRouter);
 
 module.exports = router;
