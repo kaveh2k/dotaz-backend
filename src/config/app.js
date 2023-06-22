@@ -1,10 +1,16 @@
+require("dotenv").config();
 const cors = require("cors");
 const bodyParser = require("body-parser");
-require("dotenv").config();
 const express = require("express");
 const helmet = require("helmet");
 const router = require("../routers/index.router");
 const clientIp = require("../middlewares/clientIp.middleware");
+const session = require("express-session");
+const passport = require("passport");
+const SteamStrategy = require("passport-steam").Strategy;
+const jwt = require("jsonwebtoken");
+const crypto = require("crypto");
+const mongoose = require("mongoose");
 
 const app = express();
 
