@@ -6,23 +6,37 @@ const helmet = require("helmet");
 const router = require("../routers/index.router");
 const clientIp = require("../middlewares/clientIp.middleware");
 const session = require("express-session");
-const passport = require("passport");
-const SteamStrategy = require("passport-steam").Strategy;
-const jwt = require("jsonwebtoken");
-const crypto = require("crypto");
-const mongoose = require("mongoose");
+const generateRandomSecret = require("../services/RandomSecret.service");
 
+const jwt = require("jsonwebtoken");
+
+const { db } = require("./database");
+
+const sessionSecret = generateRandomSecret();
+const jwtSecret = process.env.JWT_SECRET;
+
+// Set up Express app
 const app = express();
 
+// Set up Express middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(helmet());
 app.use(cors());
+app.use(
+  session({
+    secret: sessionSecret,
+    resave: true,
+    saveUninitialized: true,
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Middleware to extract client IP address
 app.use(clientIp);
 
-// Middleware to handle Routes
+// Middleware to Routes
 app.use("/", router);
 
 module.exports = app;
