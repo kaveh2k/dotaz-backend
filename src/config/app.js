@@ -4,11 +4,17 @@ const bodyParser = require("body-parser");
 const express = require("express");
 const helmet = require("helmet");
 const router = require("../routers/index.router");
-const clientIp = require("../middlewares/clientIp.middleware");
 const session = require("express-session");
 const generateRandomSecret = require("../services/RandomSecret.service");
 const sessionSecret = generateRandomSecret();
 const passport = require("./passport");
+
+const MongoStore = require("connect-mongo")(session);
+
+const store = new MongoStore({
+  url: process.env.MONGODB_URI, // Replace with your MongoDB connection string
+  collection: "LoginSessions", // Specify the name of the collection to store sessions
+});
 
 // Set up Express app
 const app = express();
@@ -24,6 +30,7 @@ app.use(
     secret: sessionSecret,
     resave: true,
     saveUninitialized: true,
+    store: store,
   })
 );
 
