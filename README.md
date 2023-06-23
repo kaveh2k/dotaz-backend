@@ -1,5 +1,7 @@
 # Dota 2 stats (backend)
 
+Project website: [dotaz.pro](https://www.dotaz.pro/)
+
 This is a [Express.js](https://expressjs.com/) project.
 
 This is the backend project to handle fetching data and other features.
@@ -40,7 +42,7 @@ npm install
 
 - Pick Ban: You can find pick ban details.
 - Score and Time: You can see the score, time, and the winning side.
-- In Next.js project, I used the Fuse Algorithm to find pictures based on the given name you can find it on main project [Dotaz](https://github.com/kaveh2k/dotaz/).
+- In Next.js project, I used the Fuse Algorithm to find pictures based on the given name, you can find it on main project [Dotaz](https://github.com/kaveh2k/dotaz/).
 - This is the backend coded on Express to fetch data from [Stratz API](https://stratz.com/), which is a GraphQL API. It returns the response on a RESTful API.
 
 ## Contributing
