@@ -10,7 +10,7 @@ const sessionSecret = generateRandomSecret();
 const passport = require("./passport");
 
 //collection to store sessions
-const MongoStore = require("connect-mongo");
+const MongoStore = require("connect-mongo")(session);
 
 const store = new MongoStore({
   mongoUrl: process.env.MONGODV_URI,
