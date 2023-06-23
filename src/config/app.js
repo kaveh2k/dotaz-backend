@@ -30,9 +30,6 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Middleware to extract client IP address
-app.use(clientIp);
-
 // Middleware to Routes
 app.use("/", router);
 
