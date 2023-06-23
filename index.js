@@ -7,10 +7,10 @@ const { db } = require("./src/config/database");
 // Database connection
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 db.on("connected", () => {
-  console.log("Connected to MongoDB");
+  console.log("Connected to Database");
 });
 
 // Server connection
 app.listen(PORT, () => {
-  console.log(`Server is running on ${PORT}`);
+  console.log(`Server is running on ${PORT} and witing for database ....`);
 });

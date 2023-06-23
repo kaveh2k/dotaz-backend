@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const { mongoose } = require("mongoose");
 const User = require("../schema/user.schema");
 
 // Connect to MongoDB using Mongoose

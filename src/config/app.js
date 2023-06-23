@@ -8,7 +8,7 @@ const clientIp = require("../middlewares/clientIp.middleware");
 const session = require("express-session");
 const generateRandomSecret = require("../services/RandomSecret.service");
 const sessionSecret = generateRandomSecret();
-
+const passport = require("./passport");
 // Set up Express app
 const app = express();
 
