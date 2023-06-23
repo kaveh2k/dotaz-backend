@@ -11,28 +11,26 @@ passport.use(
       apiKey: process.env.STEAM_API_KEY,
     },
     (identifier, profile, done) => {
-      User.findOne({ steamId: profile.id }, (err, user) => {
-        if (err) return done(err);
+      const user = User.findOne({ steamId: profile.id });
 
-        if (!user) {
-          const newUser = new User({
-            steamId: profile.id,
-            displayName: profile.displayName,
-            email: profile.emails[0].value,
-            avatar: profile.photos[0].value,
-            profileUrl: profile._json.profileurl,
-            realName: profile._json.realname,
-            countryCode: profile._json.loccountrycode,
-          });
+      if (!user) {
+        const newUser = new User({
+          steamId: profile.id,
+          displayName: profile.displayName,
+          email: profile.emails[0].value,
+          avatar: profile.photos[0].value,
+          profileUrl: profile._json.profileurl,
+          realName: profile._json.realname,
+          countryCode: profile._json.loccountrycode,
+        });
 
-          newUser.save((err) => {
-            if (err) return done(err);
-            return done(null, newUser);
-          });
-        } else {
-          return done(null, user);
-        }
-      });
+        newUser.save((err) => {
+          if (err) return done(err);
+          return done(null, newUser);
+        });
+      } else {
+        return done(null, user);
+      }
     }
   )
 );
