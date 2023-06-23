@@ -10,11 +10,14 @@ const sessionSecret = generateRandomSecret();
 const passport = require("./passport");
 
 //collection to store sessions
-const MongoStore = require("connect-mongo").default;
+const MongoDBStore = require("connect-mongodb-session")(session);
 
-const store = new MongoStore({
-  mongoUrl: process.env.MONGODV_URI,
-  collectionName: "LoginSessions",
+const store = new MongoDBStore({
+  uri: process.env.MONGODV_URI,
+  collection: "sessions",
+});
+store.on("error", (error) => {
+  console.error("MongoDB session store error:", error);
 });
 
 // Set up Express app
