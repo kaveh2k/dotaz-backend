@@ -16,4 +16,3 @@ query MatchData($id: Long!) {
     }
   }
 }
-// TODO: add this to match.service.js

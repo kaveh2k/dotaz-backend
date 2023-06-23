@@ -10,39 +10,67 @@ passport.use(
       realm: process.env.REALM,
       apiKey: process.env.STEAM_API_KEY,
     },
-    (identifier, profile, done) => {
-      const user = User.findOne({ steamId: profile.id });
+    async (identifier, profile, done) => {
+      try {
+        const user = await User.find({ steamId: profile.id });
+        if (
+          user === null ||
+          user === undefined ||
+          !user ||
+          user[0] === undefined
+        ) {
+          // saving new user
+          const newUser = new User({
+            steamId: profile.id,
+            displayName: profile.displayName,
+            avatar: profile._json.avatarfull,
+            profileUrl: profile._json.profileurl,
+          });
 
-      if (!user) {
-        const newUser = new User({
-          steamId: profile.id,
-          displayName: profile.displayName,
-          email: profile.emails[0].value,
-          avatar: profile.photos[0].value,
-          profileUrl: profile._json.profileurl,
-          realName: profile._json.realname,
-          countryCode: profile._json.loccountrycode,
-        });
-
-        newUser.save((err) => {
-          if (err) return done(err);
-          return done(null, newUser);
-        });
-      } else {
-        return done(null, user);
+          await newUser
+            .save()
+            .then((res) => {
+              // new user saved
+              return done(null, res);
+            })
+            .catch((err) => {
+              // new user saving error
+              return done(err);
+            });
+        } else {
+          // user found
+          const userFound = user;
+          return done(null, userFound);
+        }
+      } catch (error) {
+        // error in findig user
+        return done(error);
       }
     }
   )
 );
 
-passport.serializeUser((user, done) => {
-  done(null, user.id);
+passport.serializeUser(async (user, done) => {
+  // Serialized
+  if (!user[0]) {
+    // user.id in serialized, user.id
+    done(null, user.id);
+  } else if (user[0].id) {
+    // user[0].id in serialized, user[0].id
+    done(null, user[0].id);
+  }
 });
 
-passport.deserializeUser((id, done) => {
-  User.findById(id, (err, user) => {
-    done(err, user);
-  });
+passport.deserializeUser(async (id, done) => {
+  console.log("Deserialized");
+  console.log("id in Deserialized", id);
+  try {
+    // Retrieve the user from the database based on their ID
+    const user = await User.findById(id);
+    done(null, user);
+  } catch (error) {
+    done(error);
+  }
 });
 
 module.exports = passport;

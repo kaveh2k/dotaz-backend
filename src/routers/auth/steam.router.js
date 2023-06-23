@@ -3,10 +3,18 @@ const router = express.Router();
 const passport = require("../../config/passport");
 const { getReturn } = require("../../controllers/steamLogin/getReturn");
 
-router.use("/", passport.authenticate("steam"));
+router.use(
+  "/",
+  passport.authenticate("steam", {
+    failureRedirect: process.env.FAILURE_REDIRECT_URL,
+  })
+);
+
+// TODO: set url
 router.use(
   "/return",
   passport.authenticate("steam", {
+    successRedirect: process.env.RETURN_URL,
     failureRedirect: process.env.FAILURE_REDIRECT_URL,
   }),
   getReturn

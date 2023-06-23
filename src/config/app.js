@@ -9,11 +9,13 @@ const session = require("express-session");
 const generateRandomSecret = require("../services/RandomSecret.service");
 const sessionSecret = generateRandomSecret();
 const passport = require("./passport");
+
 // Set up Express app
 const app = express();
 
 // Set up Express middleware
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(require("cookie-parser")());
 app.use(express.json());
 app.use(helmet());
 app.use(cors());
@@ -24,6 +26,7 @@ app.use(
     saveUninitialized: true,
   })
 );
+
 app.use(passport.initialize());
 app.use(passport.session());
 
