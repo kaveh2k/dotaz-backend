@@ -12,7 +12,7 @@ const passport = require("./passport");
 const MongoStore = require("connect-mongo");
 
 const store = new MongoStore({
-  url: process.env.MONGODB_URI, // Replace with your MongoDB connection string
+  url: process.env.MONGODV_URI, // Replace with your MongoDB connection string
   collection: "LoginSessions", // Specify the name of the collection to store sessions
 });
 
