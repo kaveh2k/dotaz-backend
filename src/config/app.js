@@ -9,7 +9,7 @@ const generateRandomSecret = require("../services/RandomSecret.service");
 const sessionSecret = generateRandomSecret();
 const passport = require("./passport");
 
-const MongoStore = require("connect-mongo")(session);
+const MongoStore = require("connect-mongo").default;
 
 const store = new MongoStore({
   url: process.env.MONGODB_URI, // Replace with your MongoDB connection string
