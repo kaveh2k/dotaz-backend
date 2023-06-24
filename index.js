@@ -1,5 +1,5 @@
 // session
-const generateRandomSecre = require("./src/services/RandomSecret.service");
+const generateRandomSecret = require("./src/services/RandomSecret.service");
 const session = require("express-session");
 const sessionSecret = generateRandomSecret();
 const app = require("./src/config/app");
