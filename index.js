@@ -7,6 +7,7 @@ const app = require("./src/config/app");
 const PORT = process.env.PORT || 5000;
 
 const { db } = require("./src/config/database");
+const passport = require("./src/config/passport");
 
 //collection to store sessions
 const MongoDBStore = require("connect-mongodb-session")(session);
@@ -32,6 +33,9 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 db.on("connected", () => {
   console.log("Connected to Database");
 });
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Server connection
 app.listen(PORT, () => {
