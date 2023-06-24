@@ -11,6 +11,7 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo");
 
 const generateRandomSecret = require("../services/RandomSecret.service");
+
 // Set up Express app
 const app = express();
 
@@ -31,6 +32,7 @@ app.use(require("cookie-parser")());
 app.use(express.json());
 app.use(helmet());
 app.use(cors());
+
 // Database connection
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 db.on("connected", () => {

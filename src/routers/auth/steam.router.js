@@ -10,7 +10,6 @@ router.use(
   })
 );
 
-// TODO: set url
 router.use(
   "/return",
   passport.authenticate("steam", {

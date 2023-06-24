@@ -17,7 +17,7 @@ const getReturn = async (req, res, next) => {
   );
 
   // Redirect to the frontend with the JWT token as a query parameter
-  res.status(200).redirect(`${process.env.REDIRECT_URL}?token=${token}`);
+  res.redirect(`${process.env.REDIRECT_URL}?token=${token}`);
 };
 
 module.exports = {

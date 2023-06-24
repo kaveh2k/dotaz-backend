@@ -39,8 +39,7 @@ passport.use(
             });
         } else {
           // user found
-          const userFound = user;
-          return done(null, userFound);
+          return done(null, user);
         }
       } catch (error) {
         // error in findig user
@@ -49,28 +48,11 @@ passport.use(
     }
   )
 );
-
-passport.serializeUser(async (user, done) => {
-  // Serialized
-  if (!user[0]) {
-    // user.id in serialized, user.id
-    done(null, user.id);
-  } else if (user[0].id) {
-    // user[0].id in serialized, user[0].id
-    done(null, user[0].id);
-  }
+passport.serializeUser(function (user, done) {
+  done(null, user);
 });
 
-passport.deserializeUser(async (id, done) => {
-  console.log("Deserialized");
-  console.log("id in Deserialized", id);
-  try {
-    // Retrieve the user from the database based on their ID
-    const user = await User.findById(id);
-    done(null, user);
-  } catch (error) {
-    done(error);
-  }
+passport.deserializeUser(function (obj, done) {
+  done(null, obj);
 });
-
 module.exports = passport;
