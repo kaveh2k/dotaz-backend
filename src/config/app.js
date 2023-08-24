@@ -5,7 +5,7 @@ const express = require("express");
 const helmet = require("helmet");
 const router = require("../routers/index.router");
 
-const { db } = require("./database");
+// const { db } = require("./database");
 const passport = require("./passport");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
@@ -20,9 +20,9 @@ app.use(
     secret: generateRandomSecret(),
     resave: true,
     saveUninitialized: true,
-    store: MongoStore.create({
-      mongoUrl: process.env.MONGODV_URL,
-    }),
+   // store: MongoStore.create({
+    //  mongoUrl: process.env.MONGODV_URL,
+   // }),
   })
 );
 
@@ -34,10 +34,10 @@ app.use(helmet());
 app.use(cors());
 
 // Database connection
-db.on("error", console.error.bind(console, "MongoDB connection error:"));
-db.on("connected", () => {
-  console.log("Connected to Database");
-});
+//db.on("error", console.error.bind(console, "MongoDB connection error:"));
+//db.on("connected", () => {
+//  console.log("Connected to Database");
+//});
 
 app.use(passport.initialize());
 app.use(passport.session());
