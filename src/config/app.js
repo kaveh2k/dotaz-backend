@@ -15,16 +15,16 @@ const generateRandomSecret = require("../services/RandomSecret.service");
 // Set up Express app
 const app = express();
 
-app.use(
-  session({
-    secret: generateRandomSecret(),
-    resave: true,
-    saveUninitialized: true,
+//app.use(
+  //session({
+  //  secret: generateRandomSecret(),
+  //  resave: true,
+ //   saveUninitialized: true,
    // store: MongoStore.create({
     //  mongoUrl: process.env.MONGODV_URL,
    // }),
-  })
-);
+ // })
+//);
 
 // Set up Express middleware
 app.use(bodyParser.urlencoded({ extended: false }));
