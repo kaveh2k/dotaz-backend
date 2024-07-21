@@ -16,7 +16,11 @@ const corsOptions = require("./corsOptions");
 // Set up Express app
 const app = express();
 
-app.use(cors(corsOptions));
+app.use(
+  cors({
+    origin: "https://dotaz.netlify.app",
+  })
+);
 // app.use(cors());
 
 //app.use(
