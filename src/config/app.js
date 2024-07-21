@@ -16,6 +16,9 @@ const corsOptions = require("./corsOptions");
 // Set up Express app
 const app = express();
 
+app.use(cors(corsOptions));
+// app.use(cors());
+
 //app.use(
 //session({
 //  secret: generateRandomSecret(),
@@ -32,9 +35,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(require("cookie-parser")());
 app.use(express.json());
 app.use(helmet());
-
-// app.use(cors(corsOptions));
-app.use(cors());
 
 // Database connection
 //db.on("error", console.error.bind(console, "MongoDB connection error:"));
