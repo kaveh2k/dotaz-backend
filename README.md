@@ -1,6 +1,6 @@
 # Dota 2 stats (backend)
 
-Project website: [dotaz.pro](https://www.dotaz.pro/)
+Project website: [dotaz](https://dotaz.netlify.app/)
 
 This is a [Express.js](https://expressjs.com/) project.
 
