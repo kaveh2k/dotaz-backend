@@ -12,6 +12,7 @@ const MongoStore = require("connect-mongo");
 
 const generateRandomSecret = require("../services/RandomSecret.service");
 
+const corsOptions = require("./corsOptions");
 // Set up Express app
 const app = express();
 
@@ -32,10 +33,6 @@ app.use(require("cookie-parser")());
 app.use(express.json());
 app.use(helmet());
 
-const corsOptions = {
-  origin: "https://dotaz.netlify.app/",
-  optionsSuccessStatus: 200,
-};
 app.use(cors(corsOptions));
 
 // Database connection
