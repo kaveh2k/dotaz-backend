@@ -33,7 +33,8 @@ app.use(require("cookie-parser")());
 app.use(express.json());
 app.use(helmet());
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
+app.use(cors());
 
 // Database connection
 //db.on("error", console.error.bind(console, "MongoDB connection error:"));
