@@ -16,14 +16,14 @@ const generateRandomSecret = require("../services/RandomSecret.service");
 const app = express();
 
 //app.use(
-  //session({
-  //  secret: generateRandomSecret(),
-  //  resave: true,
- //   saveUninitialized: true,
-   // store: MongoStore.create({
-    //  mongoUrl: process.env.MONGODV_URL,
-   // }),
- // })
+//session({
+//  secret: generateRandomSecret(),
+//  resave: true,
+//   saveUninitialized: true,
+// store: MongoStore.create({
+//  mongoUrl: process.env.MONGODV_URL,
+// }),
+// })
 //);
 
 // Set up Express middleware
@@ -31,7 +31,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(require("cookie-parser")());
 app.use(express.json());
 app.use(helmet());
-app.use(cors());
+
+const corsOptions = {
+  origin: "https://dotaz.netlify.app/",
+  optionsSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 
 // Database connection
 //db.on("error", console.error.bind(console, "MongoDB connection error:"));
